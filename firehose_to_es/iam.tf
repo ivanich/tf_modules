@@ -1,3 +1,9 @@
+provider "aws" {
+  region = "us-west-2"
+  shared_credentials_file = "~/.aws/credentials"
+  profile                 = "terraform"
+}
+
 resource "aws_iam_role" "instance" {
   name = "${var.firehose_name}"
   assume_role_policy = <<EOF

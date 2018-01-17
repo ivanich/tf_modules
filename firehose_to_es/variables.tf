@@ -31,7 +31,7 @@ variable "es_domain_name" {
 
 variable "es_version" {
   description = "The version of ElasticSearch to deploy (default 5.1)"
-  default = "5.1"
+  default = "5.5"
 }
 
 variable "es_buffer_size" {
@@ -62,6 +62,21 @@ variable "ebs_volume_size" {
 variable "es_type_name" {}
 variable "access_policies" {
   description = "IAM policy document specifying the access policies for the domain"
+  default = <<CONFIG
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "es:ESHttpGet",
+            "Principal": "*",
+            "Effect": "Allow",
+            "Condition": {
+                "IpAddress": {"aws:SourceIp": ["10.0.0.0/16"]}
+            }
+        }
+    ]
+}
+CONFIG
 }
 
 variable "es_cluster_master_count" {

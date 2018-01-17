@@ -10,7 +10,7 @@ resource "aws_elasticsearch_domain" "instance" {
 
   cluster_config {
     instance_count = "${var.es_cluster_instance_count}"
-    instance_type = "m4.large.elasticsearch"
+    instance_type = "t2.small.elasticsearch"
     dedicated_master_enabled = "${var.es_cluster_master_count > 0}"
     dedicated_master_type = "${var.es_cluster_master_count > 0 ? "m4.large.elasticsearch" : ""}"
     dedicated_master_count = "${var.es_cluster_master_count}"
